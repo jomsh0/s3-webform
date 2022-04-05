@@ -1,0 +1,47 @@
+@import url('fonts/bookerly/stylesheet.css');
+@import url('fonts/ember/stylesheet.css');
+@import url('fonts/source-serif/stylesheet.css');
+
+:root {
+    background: #222;
+    color: #c8c8c8;
+    padding: 1.5rem;
+    --sans: amazon_ember, system-ui, sans-serif;
+    --serif: source_serif_pro, serif;
+}
+body {
+    margin: 1rem auto; max-width: 650px;
+    font-family: var(--sans);
+}
+main { text-align: justify; }
+h1, h2 { color: #eee; font-family: var(--serif); }
+h2 { font-size: 16pt; }
+h2.subtitle { font-family: var(--sans); font-style: italic; }
+header hgroup > * { margin: 0; }
+header > * { margin-bottom: 1rem; }
+header { display: flex; flex-wrap: wrap; align-items: center; }
+header > :first-child { flex: auto; }
+header a { text-decoration: none; }
+header a:hover { border-bottom: 1px solid; }
+a { color: inherit; }
+
+input[type=file] { color: transparent; }
+input::file-selector-button, button {
+    padding: .7em 1em; font-weight: bold;
+    background: #383838; border: solid 2px #888;
+    color: #ddd; border-radius: .3em;
+}
+form:valid button:hover, input::file-selector-button:hover {
+    border-color: unset;
+}
+button:disabled, form:invalid button {
+    border-color: #555; color: #999;
+}
+textarea {
+    font-family: inherit; font-size: inherit;
+    width: 100%; background: #eee; color: #222;
+    border-radius: .3em; padding: .5em;
+}
+#bottom > * { margin: 3em 0; }
+#bottom p   { margin-left: .5em; }
+output .status { letter-spacing: 3; }

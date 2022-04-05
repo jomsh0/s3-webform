@@ -1,0 +1,92 @@
+<form action='https://j-kqz.s3.amazonaws.com/'
+      enctype='multipart/form-data'
+      method=POST
+>
+    <h2><label for=file>Upload</label></h2>
+
+<template id='s3boiler'>
+    <input type=hidden name=policy value='<% base64 -w0 policy.json %>'>
+    <input type=hidden name=x-amz-algorithm  value='<% ./qp.sh x-amz-algorithm %>'>
+    <input type=hidden name=x-amz-credential value='<% ./qp.sh x-amz-credential %>'>
+    <input type=hidden name=x-amz-date       value='<% ./qp.sh x-amz-date %>'>
+    <input type=hidden name=x-amz-signature  value='<% ./gen_sig.sh %>'>
+</template>
+
+    <input type=hidden name=key value='${filename}'>
+
+    <template id='fileOut'> <p>
+        <output for=file>
+            <span class='name'></span> <span class='status'>••••••</span>
+        </output>
+    </p> </template>
+    <p><input type=file name=file required onchange='event.preventDefault(); handleFile(this.form);'>
+</form>
+
+<form action='https://j-kqz.s3.amazonaws.com/'
+      enctype='multipart/form-data'
+      onsubmit='event.preventDefault(); handleMessage(this);'
+      method=POST
+>
+    <h2><label for=file>Comments</label></h2>
+
+    <input type=hidden name=key value='message.txt'>
+    <p><textarea name=file cols=60 rows=10 required></textarea></p>
+    <p><button>Submit</button> <output><span></span></output></p>
+</form>
+
+<script>
+    const rndBuf = crypto.getRandomValues(new Uint8Array(4))
+        , rndHex = Array.from(rndBuf).map(v => v.toString(16)).join('')
+        , queryP = new URL(window.location.href).searchParams.get('p') ?? ''
+
+    let prefix = queryP.trim()
+    if (prefix) { prefix += '/' }
+    prefix += rndHex
+
+    for (const form of document.forms) {
+        const boiler = document.querySelector('#s3boiler').content.cloneNode(true)
+        form.insertBefore(boiler, form.firstElementChild)
+        form.key.value = prefix + '/' + form.key.value
+    }
+
+    {
+        fetch(new URL(prefix, document.forms[0].action), { mode: 'no-cors' })
+            .catch(e => e)
+    }
+
+    const post = f => fetch(f.action, { method: 'POST', body: new FormData(f) })
+
+    function handleFile(form) {
+        const file = form.querySelector('input[type=file]')
+            , name = file.files[0].name
+            , out = document.querySelector('#fileOut').content.cloneNode(true)
+            , status = out.querySelector('.status')
+
+        post(form).then(res => {
+            status.textContent = res.ok ? '👍' : '👎'
+        })
+
+        out.querySelector('.name').textContent = name
+        form.insertBefore(out, file.parentElement)
+    }
+
+    function handleMessage(form) {
+        const sweep = enable => {
+            for (const el of form.elements) {
+                el.disabled = !enable
+            }
+        }
+
+        const out = form.querySelector('output > span')
+        out.textContent = '••••'
+
+        post(form).then(res => {
+            sweep(true)
+            out.textContent = res.ok ? '👍' : '👎'
+            form.querySelector('textarea').value = ''
+        })
+
+        sweep(false)
+    }
+
+</script>
