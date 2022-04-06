@@ -1,0 +1,8 @@
+/* Amazon Bookerly rules */
+<% tr -s '\n' < fonts/bookerly/stylesheet.css %>
+
+/* Amazon Ember rules */
+<% tr -s '\n' < fonts/ember/stylesheet.css %>
+
+/* Source Serif Pro rules */
+<% tr -s '\n' < fonts/source-serif/stylesheet.css %>

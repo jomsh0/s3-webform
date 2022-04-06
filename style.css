@@ -1,6 +1,4 @@
-@import url('fonts/bookerly/stylesheet.css');
-@import url('fonts/ember/stylesheet.css');
-@import url('fonts/source-serif/stylesheet.css');
+@import url('fonts.css');
 
 :root {
     background: #222;
