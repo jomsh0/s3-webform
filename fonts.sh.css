@@ -1,8 +1,17 @@
+<%
+_import() {
+    local fontdir="fonts/$1"
+    # remove blank lines, rewrite urls
+    sed -e '/^$/d' \
+        -e "s%[[:alnum:]_-]\+.woff2%$fontdir/&%" \
+           < "$fontdir/stylesheet.css"
+}
+%>
 /* Amazon Bookerly rules */
-<% tr -s '\n' < fonts/bookerly/stylesheet.css %>
+<% _import bookerly %>
 
 /* Amazon Ember rules */
-<% tr -s '\n' < fonts/ember/stylesheet.css %>
+<% _import ember %>
 
 /* Source Serif Pro rules */
-<% tr -s '\n' < fonts/source-serif/stylesheet.css %>
+<% _import source-serif %>
