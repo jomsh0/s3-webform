@@ -12,11 +12,13 @@ body {
     font-family: var(--sans);
 }
 main { text-align: justify; }
-h1, h2 { color: #eee; font-family: var(--serif); }
-h2 { font-size: 16pt; }
+h1, h2 { color: #ddd; font-family: var(--serif); }
+h1 { font-size: 18pt; }
+h2 { font-size: 14pt; }
+h2 a[rel=author] { color: #ccc; }
 h2.subtitle { font-family: var(--sans); font-style: italic; }
-header hgroup > * { margin: 0; }
-header > * { margin-bottom: 1rem; }
+header h1, header h2 { margin: 0; }
+header > hgroup, header > h2 { margin-bottom: 1rem; }
 header { display: flex; flex-wrap: wrap; align-items: center; }
 header > :first-child { flex: auto; }
 header a { text-decoration: none; }
