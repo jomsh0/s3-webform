@@ -9,6 +9,8 @@ date=${date%%T*}
 service=s3
 end=aws4_request
 
+# also hmac256 from libgcrypt
+# step crypto auth digest
 hmac() {
     local nm=${2:-hexkey}
     openssl dgst -sha256 -mac HMAC -macopt "$nm:$1" | \
