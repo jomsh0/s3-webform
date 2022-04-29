@@ -6,10 +6,10 @@
 
 <template id='s3boiler'>
     <input type=hidden name=policy value='<% base64 -w0 policy.json %>'>
-    <input type=hidden name=x-amz-algorithm  value='<% ./qp.sh x-amz-algorithm %>'>
-    <input type=hidden name=x-amz-credential value='<% ./qp.sh x-amz-credential %>'>
-    <input type=hidden name=x-amz-date       value='<% ./qp.sh x-amz-date %>'>
-    <input type=hidden name=x-amz-signature  value='<% ./gen_sig.sh %>'>
+    <input type=hidden name=x-amz-algorithm  value='<% ./policy.sh query x-amz-algorithm %>'>
+    <input type=hidden name=x-amz-credential value='<% ./policy.sh query x-amz-credential %>'>
+    <input type=hidden name=x-amz-date       value='<% ./policy.sh query x-amz-date %>'>
+    <input type=hidden name=x-amz-signature  value='<% ./policy.sh sign %>'>
 </template>
 
     <input type=hidden name=key value='${filename}'>

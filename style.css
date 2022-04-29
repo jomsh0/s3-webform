@@ -15,12 +15,10 @@ main { text-align: justify; }
 h1, h2 { color: #ddd; font-family: var(--serif); }
 h1 { font-size: 18pt; }
 h2 { font-size: 14pt; }
-h2 a[rel=author] { color: #ccc; }
-h2.subtitle { font-family: var(--sans); font-style: italic; }
-header h1, header h2 { margin: 0; }
-header > hgroup, header > h2 { margin-bottom: 1rem; }
-header { display: flex; flex-wrap: wrap; align-items: center; }
-header > :first-child { flex: auto; }
+h2 a[rel=author] { color: #aaa; }
+header { display: flex; flex-wrap: wrap-reverse; align-items: center; margin-bottom: 1.5rem; }
+header > * { margin: 0; margin-bottom: .8rem; }
+header > :first-child { flex: auto; width: 350px; }
 header a { text-decoration: none; }
 header a:hover { border-bottom: 1px solid; }
 a { color: inherit; }
